@@ -7,38 +7,29 @@
     </body>
     <br>
     <br>
-    <a href="{{ route("post.create") }}">Crear Nuevo Usuario</a>
+    <a href="{{ route("category.create") }}">Crear Nuevo Usuario</a>
     <br>
     <br>
         <table style="background-color: rgba(234, 240, 61, 0.436)">
             <thead>
                 <tr>
                     <th>Titulo</th> 
-                    <th>Categoria</th>
-                    <th>Posted</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
 
                 <tbody>
-                    @foreach ($posts as $p)
+                    @foreach ($categories as $c)
                     <tr>
                         <td>
-                            {{ $p->title }}&emsp;&emsp;&emsp;
-                        </td>
-
-                        <td>{{ $p ->category ->title}}&emsp;&emsp;</td>
-
+                            {{ $c->title }}&emsp;&emsp;&emsp;
+                        </td>                    
                         <td>
-                            {{ $p->posted }}&emsp;&emsp;&emsp;
-                        </td>
-                        
-                        <td>
-                           <a href="{{ route("post.edit",$p) }}" >Editar&emsp;</a>
+                           <a href="{{ route("category.edit",$c) }}" >Editar&emsp;</a>
 
-                            <a href="{{ route("post.show",$p)}}">Ver</a>
+                            <a href="{{ route("category.show",$c)}}">Ver</a>
 
-                            <form action="{{ route("post.destroy",$p) }}" method="post">
+                            <form action="{{ route("category.destroy",$c) }}" method="post">
                             @method("DELETE")
                                 @csrf
                                 <button type="submit">Eliminar</button>                            
@@ -50,5 +41,5 @@
                 </tbody>
                 
         </table>
-        {{$posts-> links()}}
+        {{$categories-> links()}}
 @endsection

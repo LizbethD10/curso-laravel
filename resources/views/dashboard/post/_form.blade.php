@@ -1,7 +1,7 @@
 @csrf
             
             
-            
+            <br>
             <body style="background-color:#599995c2;">
             </body>
             <label for="">Titulo</label>
