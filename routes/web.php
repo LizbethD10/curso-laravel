@@ -1,14 +1,10 @@
 <?php
-//namespace app\Http\Controllers\Dashboard;
- 
-//use app\Http\Controllers\Dashboard\TestController;
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PostController;
-use App\Http\Middleware\TestMiddleware;
+
+
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-//use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,34 +16,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route:: get ('/',function(){
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([App\Http\Middleware\TestMiddleware::class])->group(function()
-{
-    Route::get('/test/{id}/{name?}',function($id = 10, $name="pepe"){
-        echo $id;
-        echo $name;
-    });
+
+
+Route::group(['prefix'=>'dashboard','middleware'=>'auth'],function(){
+
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    Route::resources([
+        'post'=>  App\Http\Controllers\PostController::class,
+        'category'=>  App\Http\Controllers\CategoryController::class,
+    ]);
 });
 
-Route::group(['prefix'=>'dashboard'],function(){
-     Route::resource('post', PostController::class) ;
-     Route::resource('category', CategoryController::class) ;
-    // Route:: resources([
-    //     'post'=>PostController::class;
-    //     'Category'=>CategoryController::class;
-    // ]);
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::controller(PostController::class)->group(function(){
-// });
-//Route::get('/category/{is',[CategoryController::class,'new']);
-
-    
-
-
-
-
+require __DIR__.'/auth.php';
