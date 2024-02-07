@@ -17,16 +17,16 @@ h1{
 /*********************+tabla basica*/
 
 .table {
-    @apply table-auto w-full
+    @apply table-auto w-full border  border-black
 }
 .table th {
-    @apply px-6 py-3 bg-sky-900  font-medium text-white uppercase border leading-8 tracking-widest
+    @apply px-6 py-3 bg-sky-900  font-medium text-white uppercase border leading-8 tracking-widest border  border-black
 }
 .table tr{
-    @apply border 
+    @apply  border  border-black
 }
 .table td{
-    @apply px-6 py-4 whitespace-normal
+    @apply px-6 py-4 whitespace-normal border  border-black
 }
 
 /*********************+tabla basica*/
@@ -70,7 +70,7 @@ label{
     @apply p-10 rounded shadow-sm
 }
 .card-white{
-    @apply bg-neutral-100
+    @apply bg-white
 }
 
 /********************* card */

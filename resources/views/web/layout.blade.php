@@ -18,27 +18,14 @@
         </head>
 
     <body class="font-sans antialiased">
-        <div class="min-h-screen  bg-neutral-200">
-            @include('layouts.navigation')
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-neutral-200 dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-        
-
-                @if (session('status'))
-                    {{ session('status') }} 
-                @endif
+        <div class="min-h-screen  bg-white">
+      
+      
                 
                 <div class="container">
-                    <div class="card card-white mt-4 m-80">
-                       
+                    <div class="card card-white mt-4">   
                     @yield('content')
-                    </div>                   
+                    </div>                  
                 </div>
 
                
