@@ -5,6 +5,9 @@ namespace App\Http\Requests\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
+use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Response;
+
 class StoreRequest extends FormRequest
 {
 
@@ -20,6 +23,15 @@ class StoreRequest extends FormRequest
     {
         return true;
     }
+
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if($this->expectsJson()){
+        $response = new Response($validator->errors(),422);
+        throw new ValidationException($validator, $response);
+        }
+    }
+
     static public function myRules()  
     {
         return [
@@ -31,20 +43,10 @@ class StoreRequest extends FormRequest
             "posted" => "required"        
         ];
         
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-   
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    }  
     public function rules()
     {
         return $this->myRules();
     }
+   
 }
